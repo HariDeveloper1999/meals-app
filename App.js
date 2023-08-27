@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   goalText:{
     color:"#ffffff",
-    fontSize:20,
+    fontSize:22,
   },
   itemContainer:{
     flexDirection:'row',
