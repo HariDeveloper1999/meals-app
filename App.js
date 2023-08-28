@@ -15,7 +15,6 @@ export default function App() {
    const deleteHandler = (item) => {
     setGoalsData((prevState) => prevState.filter((prevItem) => prevItem !== item))
   }
- console.log(goalsData)
    const addToGoalHandler = () => {
     setGoalsData(prev=>[...prev,enteredGoal])
    }
@@ -37,7 +36,7 @@ export default function App() {
           goalsData.map((item)=>
           <View style={styles.itemContainer} key={item}>
           <Text style = {styles.goalText} >{item}</Text>
-          <Button title='Del' style = {styles.goalText} onPress={()=>deleteHandler(item)}/>
+          <Button title='Del' color="red" style = {styles.goalText} onPress={()=>deleteHandler(item)}/>
           </View>
           )
         }
