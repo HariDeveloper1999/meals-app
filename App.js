@@ -1,6 +1,6 @@
 
 import { useState,useEffect } from 'react';
-import { Button, StyleSheet, Text, View,TextInput,ScrollView } from 'react-native';
+import { Button, StyleSheet, Text, View,TextInput,ScrollView, FlatList } from 'react-native';
 
 export default function App() {
   const [enteredGoal,setEnteredGoal] = useState("");
@@ -16,7 +16,9 @@ export default function App() {
     setGoalsData((prevState) => prevState.filter((prevItem) => prevItem !== item))
   }
    const addToGoalHandler = () => {
-    setGoalsData(prev=>[...prev,enteredGoal])
+    setGoalsData(prev=>[...prev,
+      {text:enteredGoal,id:Math.random().toString()}
+    ])
    }
    
   return (
@@ -30,8 +32,9 @@ export default function App() {
          <Button title="Add Goal" onPress={addToGoalHandler}></Button>
       </View>
       <View style={styles.textContainer}>
-        <ScrollView>
-      
+      {/* With pure js */}
+        
+{/*       
         {
           goalsData.map((item)=>
           <View style={styles.itemContainer} key={item}>
@@ -39,8 +42,29 @@ export default function App() {
           <Button title='Del' color="red" style = {styles.goalText} onPress={()=>deleteHandler(item)}/>
           </View>
           )
+        } */} 
+
+        {/* With react native FlatList component */}
+
+        <FlatList
+        alwaysBounceVertical={false}
+        data={goalsData}
+        keyExtractor={(item,index)=>{
+           return item.id
+
+        }}
+        renderItem={
+        (itemValue)=>{
+          return(
+            <View style={styles.itemContainer}>
+            <Text style = {styles.goalText} >{itemValue.item.text}</Text>
+            <Button title='Del' color="red" style = {styles.goalText} onPress={()=>deleteHandler(itemValue.item)}/>
+            </View>
+          )
         }
-     </ScrollView>
+        }
+        >
+     </FlatList>
       </View>
 
     </View>
