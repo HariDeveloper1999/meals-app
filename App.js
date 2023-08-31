@@ -1,10 +1,10 @@
-// import Home from "./components/Home";
+import StartGameScreen from "./screens/StartGameScreen";
 import { StyleSheet,View } from "react-native";
 export default function App() {
   
   return (
     <View style={styles.appContainer}>
-     {/* <Home/> */}
+      <StartGameScreen/>
      </View>
   );
 }
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     padding:50,
     paddingHorizontal:16,
     flex:1,
-    backgroundColor:"#686962"
+    // backgroundColor:"#686962"
    
   },
  
