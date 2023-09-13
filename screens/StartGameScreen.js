@@ -9,6 +9,7 @@ import Title from "../components/Title";
 function StartGameScreen({pickedNumberHandler}) {
  const [enteredNumber,setEnteredNumber]=useState();
  
+
  const numberInputHandler = (enteredNumber)=>{
   setEnteredNumber(enteredNumber)
 }

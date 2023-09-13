@@ -1,10 +1,12 @@
-import {View,Text,SafeAreaView,StyleSheet,Alert} from "react-native"
+import {View,Text,SafeAreaView,StyleSheet,Alert, FlatList} from "react-native"
 import Title from "../components/Title"
 import NumberContainer from "../components/NumberContainer";
 import { useEffect, useState } from "react";
 import PrimaryBtn from "../components/primaryBtn";
 import Colors from "../constants/Colors";
 import {Ionicons} from "@expo/vector-icons"
+import FlatItem from "../components/FlatItem";
+
 
 
 const numberHandler=(min,max,excluded)=>{
@@ -24,10 +26,12 @@ function GameScreen({userNum,overHandler,clickCountHandler}) {
     const [maxVal,setMaxVal]=useState(100)
     const initialGuess = numberHandler(1,100,userNum);
     const [currentGuess,setCurrentGuess]=useState(initialGuess);
+    const [guessData,setGuessData]=useState([])
 
 useEffect(()=>{
  currentGuess === userNum && overHandler()
 },[currentGuess,userNum,overHandler])
+
 
 const guessBtnHandler=(direction)=>{
     
@@ -36,17 +40,17 @@ const guessBtnHandler=(direction)=>{
         Alert.alert("Dont lie", "number is wrong",[{text:"Sorry!",style:'cancel'}])
 
     }
-
-
-   if(direction === "lower"){
+    else if(direction === "lower"){
         let difference=userNum-currentGuess
         setCurrentGuess(difference >=(-10)? currentGuess-1 : currentGuess-10)
         clickCountHandler()
+        setGuessData((prev)=>[...prev,currentGuess])
        
     }else if(direction === "higher"){
         let difference=userNum-currentGuess
         setCurrentGuess(difference >= 10? currentGuess+10 : currentGuess+1)
        clickCountHandler()
+       setGuessData((prev)=>[...prev,currentGuess])
     }
     else {
         Alert.alert(
@@ -87,11 +91,33 @@ const guessBtnHandler=(direction)=>{
             
          
         </View>
-        <View>
-           {/* <Text>
-            LOG ROUNDS
-            </Text>  */}
+        {guessData?.length > 0 &&
+        <View style={styles.logView}>
+           <Title
+           title="LOG ROUNDS"
+           
+           />
+           
+            
+           <View >
+           {/* {
+            guessData?.map((item)=><Text>{item}</Text>)
+           } */}
+           <FlatList
+           data={guessData}
+           renderItem={(itemData)=>
+            <FlatItem
+              value={itemData?.item}
+            />
+        
+           }
+           keyExtractor={(item)=>item}
+           
+
+           />
+           </View>
             </View>
+        }
     </View>
   
   )
@@ -114,5 +140,10 @@ const styles=StyleSheet.create({
 btnstyle:{
     width:100,
     color:Colors.yellowShade
+},
+logView:{
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:60,
 }
 })

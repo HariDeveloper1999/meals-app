@@ -16,9 +16,9 @@ function GameOver(props) {
       Your Phone needed<Text style={styles.subText}>{'  '}{loggedNumber} </Text> rounds to get The Number{'  '} 
       <Text style={styles.subText}> {pickedNumber} </Text>
       </Text>
-      <View style={styles.btn}>
-      <PrimaryBtn pressHandler={clickHandler}>Restart Game</PrimaryBtn>
-      </View>
+      {/* <View style={styles.btn}>
+      <PrimaryBtn pressHandler={clickHandler}>Start Game</PrimaryBtn>
+      </View> */}
     </View>
   )
 }
