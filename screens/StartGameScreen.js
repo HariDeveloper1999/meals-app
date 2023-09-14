@@ -1,4 +1,4 @@
-import { TextInput,View,StyleSheet, Alert } from "react-native"
+import { TextInput,View,StyleSheet, Alert,Dimensions,useWindowDimensions } from "react-native"
 import PrimaryBtn from "../components/primaryBtn"
 import { useState } from "react";
 import Colors from "../constants/Colors";
@@ -8,6 +8,7 @@ import Title from "../components/Title";
 
 function StartGameScreen({pickedNumberHandler}) {
  const [enteredNumber,setEnteredNumber]=useState();
+ const {height,width} = useWindowDimensions()
  
 
  const numberInputHandler = (enteredNumber)=>{
@@ -31,8 +32,10 @@ const ConfirmBtnHandler=()=>{
 
 }
 
+const marginTopValue=height < 400 ? 30 :200;
+
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer,{marginTop:marginTopValue}]}>
        <Title title="Enter a number" styleClass={styles.titleStyle}/>
         <TextInput
         style={styles.numberInput}
@@ -56,9 +59,10 @@ const ConfirmBtnHandler=()=>{
 export default StartGameScreen
 
 
+
 const styles=StyleSheet.create({
   inputContainer:{
-    marginTop:200,
+    // marginTop:deviceHeight < 400 ? 30 :200,
     marginHorizontal:10,
     backgroundColor:'#3b021f',
     elevation:4,

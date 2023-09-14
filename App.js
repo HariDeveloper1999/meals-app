@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import GameScreen from "./screens/GameScreen"
 import GameOver from "./screens/GameOver";
 import {useFonts} from "expo-font"
+import { StatusBar } from "expo-status-bar";
 
 
 
@@ -63,6 +64,7 @@ export default function App() {
   //   )
   // }
   return (
+    <StatusBar style="light">
     <LinearGradient style={styles.rootScreen}  colors={["#ddb52f","green"]} >
     {/* <View style={styles.appContainer}> */}
     <ImageBackground 
@@ -76,6 +78,7 @@ export default function App() {
       </ImageBackground>
       {/* </View> */}
      </LinearGradient >
+     </StatusBar>
   );
 }
 
