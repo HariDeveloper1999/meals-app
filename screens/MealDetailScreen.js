@@ -5,20 +5,34 @@ import SubTitle from "../components/SubTitle";
 import ItemMap from "../components/ItemMap";
 import { useLayoutEffect } from "react";
 import IconBtn from "../components/IconBtn";
+import { FavoriteContext } from "../store/FavoritesContext";
+import { useContext } from "react";
 
 function MealDetailScreen({route,navigation}){
     const mealId=route?.params?.mealId;
     const mealData=MEALS.find((mealItem)=>mealItem?.id === mealId)
 
+   const favctx = useContext(FavoriteContext);
+   const favMealId = favctx.id.includes(mealId)
+   
     const pressHandler = () => {
-        console.log("Pressed !!!!")
+        if(favMealId){
+            favctx.removeFavorites(mealId)
+        }else{
+            favctx.addToFavorites(mealId)
+        }
     }
 
     useLayoutEffect(()=>{
         navigation.setOptions({
             headerRight:()=>{
                 return(
-                   <IconBtn pressHandler={pressHandler}/>
+                   <IconBtn 
+                   icon={favMealId ? "star" : "star-outline"}
+                   color="white"
+                   size={24}
+
+                   pressHandler={pressHandler}/>
                 )
             }
         })

@@ -1,7 +1,8 @@
 import { useLayoutEffect,useEffect } from "react";
 import { View,Text,StyleSheet, FlatList } from "react-native";
 import { MEALS,CATEGORIES } from "../data/dummy-data";
-import MealItem from "../components/MealItem";
+import MealsList from "../components/MealsList";
+
 
 function MealsOverView({navigation,route,options}){
 
@@ -18,28 +19,11 @@ function MealsOverView({navigation,route,options}){
     // },[catId,navigation])
   
        
-   
+   return(
+     <MealsList data={displayedMeals}/>
+   )
 
-    const renderDetails = (itemData) => {
-         return <MealItem item={itemData.item} />
-    }
-  
-    return(
-        <View style={styles.container}>
-           <FlatList
-             data={displayedMeals}
-             keyExtroctor={(item)=>item.id}
-             renderItem={renderDetails}
-           
-           />
-        </View>
-    )
+   
 
 }
 export default MealsOverView;
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        padding:16
-    }
-})

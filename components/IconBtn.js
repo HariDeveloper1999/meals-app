@@ -1,12 +1,14 @@
 
 import { Pressable,StyleSheet,Text } from "react-native";
+import { Ionicons} from '@expo/vector-icons';
 
-function IconBtn({color,icon,pressHandler}) {
+function IconBtn({color,icon, size,pressHandler}) {
+    
     
 
     return(
         <Pressable onPress={pressHandler} style={styles.root}>
-            <Text>Click me</Text>
+           <Ionicons name={icon} size={size} color={color}/>
         </Pressable>
     )
 
