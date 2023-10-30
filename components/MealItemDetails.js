@@ -19,6 +19,7 @@ const styles=StyleSheet.create({
       justifyContent:'center',
       alignItems:'center',
       padding:8,
+   
     },
     detailsItem:{
       marginHorizontal:8,

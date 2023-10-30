@@ -8,6 +8,7 @@ function Favorites({route,navigation}){
 
     const favctx = useContext(FavoriteContext);
     const favData=MEALS?.filter((meal)=>favctx?.id?.includes(meal?.id))
+    
     const homeHandler=()=>{
         navigation.navigate("Catogorys")
     }
